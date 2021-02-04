@@ -26,4 +26,3 @@
     - then when we have the second pointer reach the end we know the first as at the center
     - We can than use that marker to start inserting b1...bn interweaving it into a1...an
 
-## TEST
