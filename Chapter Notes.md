@@ -26,3 +26,56 @@
     - then when we have the second pointer reach the end we know the first as at the center
     - We can than use that marker to start inserting b1...bn interweaving it into a1...an
 
+## Stacks and Queues
+
+
+    class QueueNode {
+      
+      constructor(val) {
+        this.val = val;
+        this.next = null;
+      }
+    }
+    class Queue {
+
+      constructor() {
+        this.head = null;
+        this.tail = null;
+      }
+
+      remove() {
+        if (this.head) {
+          let val = this.head.val;
+          this.head =this.head.next
+
+
+          // sync
+          if (this.head == null)
+            this.last = null
+
+          return val 
+        } else {
+          return null;
+        }
+      }
+
+      peek() {
+        return this.head ? this.head.val : null
+      }
+
+      add(val) {
+        let node = new QueueNode(val)
+        if (this.tail)
+          this.tail.next = node;
+        this.tail = node;
+
+        // sync
+        if (this.head == null)
+          this.head = node
+        
+      }
+
+      isEmpty() {
+        return !this.head
+      }
+    }
