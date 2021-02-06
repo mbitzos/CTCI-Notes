@@ -33,54 +33,6 @@
       }
     }
   
-## Queue
-	
-	public class LinkedList {
-	    Node head;
-	    public LinkedList(List<Integer> values) {
-            Node previous = null;
-            for (int val : values) {
-               Node node= new Node(val,null);
-               if (previous == null)
-                    head= node;
-                else {
-                    previous.next = node;
-                }
-                previous = node;
-	        }
-	        this.head = head;
-	    }
-	    
-	    @Override
-	    public String toString() {
-	        return head == null ? null : head.toString();
-	    }
-    
-	   
-	    public Node getHead() { return head; }
-	}
-	
-	 public class Node {
-      public int val;
-	    public Node next;
-	    
-	    private Node(int val, Node next) {
-	        this.val = val;
-	        this.next = next;
-	    }
-	    
-	    @Override
-	    public String toString() {
-	        List<String> p = new ArrayList<>();
-	        Node curr = this;
-	        while (curr != null) {
-	            p.add(String.valueOf(curr.val));
-	            curr =curr.next;
-	        }
-	        return p.toString();
-	    }
-    }
-
 
 ## 3.1 Three in One
 **Q**: Describe how you could use a single array to implement three stacks
@@ -90,6 +42,7 @@
 - endLeft:have a pointer for the end of the first stack which grows from the left
 - endRight:have a pointer for the end of the second stack which grows from the right
 - end/startMiddle:have a pointer for the start and end of the middle stack which grows from the middle (can start at 1/3 point)
+- This questions veyr much just psuedocode for interview required
 
 </a>
 
@@ -180,7 +133,7 @@
     }
 
 ## 3.3 Stack of Plates
-**Q**: 
+**Q**: Create a stack of stacks that creates a new stack when a stack gets past a threshold
 
 ### Stack of Plates
 **t: O(1) s: O(n)**
@@ -265,4 +218,178 @@
         return peak ? peak.isEmpty() : true
       }
     
+    }
+
+## 3.4 Queue Via Stacks
+**Q**: Implement a queue with two stacks
+
+### Two Stacks
+- We use temp stacks
+- When we queue we simply add to our main stack
+- When we dequeue or peek we do this:
+  - keep popping elements on a temp stack
+  - if peeking:
+    - return temp.peek()
+  - if poping:
+    - return temp.pop()
+- an optimization we made is only transfering between the two stacks when we need to
+- So when we do a lot of pops, we dont need to put the temp values back on the main
+- When we are pushing make sure our temp stack is empty, if not do the transfer then
+
+</a>
+
+    class Queue {
+      constructor() {
+        this.stack = new Stack()
+        this.temp = new Stack()
+      }
+
+      enqueue(val) {
+        // if we have values in our temp we need to get them back
+        if (!this.temp.isEmpty()) {
+          this.copyTo(this.temp,this.stack)
+        }
+        this.stack.push(val)
+      }
+
+      dequeue() {
+        return this.getLast(true);
+      }
+
+      peek() {
+        return this.getLast(false)
+      }
+
+      getLast(remove) {
+
+        // if our temp stack is empty we should try to get our values
+        // from main stack
+        if (this.temp.isEmpty())
+          this.copyTo(this.stack,this.temp)
+
+        // if we are removing, just delete the head of the temp stack
+        return remove ? this.temp.pop() : this.temp.peek()
+      }
+
+      // copy elements from one stack to another in reverse order
+      copyTo(stackA, stackB) {
+        // go the very end
+        while (!stackA.isEmpty()) {
+          stackB.push(stackA.pop())
+        }
+      }
+
+      isEmpty() {
+        return this.stack.isEmpty()
+      }
+    }
+
+## 3.5 Sort Stack
+**Q**: Write a program to sort a stack such that the smallest items are on the top
+You can use additonal stacks but not any other datatypes
+
+### MinStack
+**s: O(n^2) t: O(n)**
+- We will have additional stack that holds a temp list of sorted elements where the top is the highest number
+- We keep adding numbers onto that as long as they are larger
+- If we find a number not larger, we set it to the side and move all elements in our temp stack back to the original array
+- once that is done add the set aside number, this will now be the largest number in the temp stack
+- repeat adding numbers from the main stack until it is empty
+- once it is empty we push all elements on reverse temp stack back to our normal stack
+- this will give us the inplace stack sorted with lowest elements from the top
+
+</a>
+
+    const sortStack = (stack) => {
+      let reverseStack = new Stack()
+
+      while (!stack.isEmpty()) {
+        
+        // keep stacking on top
+        while (stack.peek() >= reverseStack.peek())
+          reverseStack.push(stack.pop())
+
+        // we have a new min
+        if (!stack.isEmpty()) {
+          let min = stack.pop()
+
+          // set aside and move new sorted maxes to original array
+          while(!reverseStack.isEmpty()) {
+            stack.push(reverseStack.pop())
+          }
+          reverseStack.push(min)
+        }
+      }
+
+      // transfer reverse to have min on top
+      while(!reverseStack.isEmpty()) {
+        stack.push(reverseStack.pop())
+      }
+    
+    }
+    
+
+## 3.6 Animal Shelter
+**Q**: Write a datastrcuture that holds dogs and cats in a FIFO order.
+This DS should be able to do the two following methods:
+  - enqueue() same as queue
+  - dequeueAny() returns the oldest animal
+  - dequeueDog() return oldest dog
+  - dequeueCat() returns oldest cat
+You may use a linked list
+
+### Buh
+- we have two queues one for dogs one for cats
+  - queue is made with stacks (3.4)
+- We made a custom class that holds arrived property
+- When we enqueue we create an animal object and increase ticket number
+- this ensures that we knwo which of the two queues holds the oldest animal
+
+</a>
+
+    class Animal {
+      constructor(name,type, arrived) {
+        this.name = name
+        this.type = type
+        this.arrived = arrived
+      }
+
+      toString() {
+        return `${this.name}:${this.type}`
+      }
+    }
+    class AnimalShelter {
+
+      
+
+      constructor() {
+        this.dogQueue = new Queue()
+        this.catQueue = new Queue()
+        this.ticket = 0
+      }
+
+      enqueue(name,type) {
+        let animal = new Animal(name,type, ++this.ticket)
+        if (type === "dog") 
+          this.dogQueue.enqueue(animal)
+        else
+          this.catQueue.enqueue(animal);
+      }
+
+      dequeueAny() {
+        let dog = (this.dogQueue.peek() || {}).arrived
+        let cat = (this.catQueue.peek() || {}).arrived
+        if (dog < cat) {
+          return this.dequeueDog()
+        } else 
+          return this.dequeueCat()
+      }
+
+      dequeueCat() {
+        return this.catQueue.dequeue()
+      }
+
+      dequeueDog() {
+        return this.dogQueue.dequeue()
+      }
     }
