@@ -72,8 +72,7 @@ Implementation:
       }
     }
 
-    /**
-    * Util to generate a binary tree from json object (json = BinaryNode)
+    // Util to generate a binary tree from json object (json = BinaryNode)
     const createBinaryTree = (json) => {
       
       
@@ -250,3 +249,266 @@ NOTE: Max heaps are essentially the same but elements are in descending order
   - example: Man]y] => man , many 
 - These are used mainly to check for prefix or substring detection
   - As they can check if a string is a valid prefix in O(k) where k = length of string
+
+**Implementation**
+
+    class TrieNode {
+      constructor(val) {
+        this.val = val;
+        this.word = false;
+        this.children = {};
+        this.parent = null;
+      }
+
+      addChild(child) {
+        this.children[child.val] = child;
+        child.parent = this;
+      }
+      hasChildren() {
+        return Object.keys(this.children).length > 0;
+      }
+    }
+    class Trie {
+      constructor() {
+        this.root = new TrieNode(null);
+      }
+
+      // adds a word
+      addWord(word) {
+        let currentNode = this.root;
+        for (let i = 0; i < word.length; i++) {
+          if (currentNode.children[word[i]]) {
+            currentNode = currentNode.children[word[i]];
+          } else {
+            // there are no more so we can just omit the if check
+            for (let j = i; j < word.length; j++) {
+              let newC = new TrieNode(word[j]);
+              currentNode.addChild(newC);
+              currentNode = newC;
+            }
+            break;
+          }
+        }
+        // last node is a word by default
+        currentNode.word = true;
+      }
+
+      // removes a word
+      removeWord(word) {
+        let currentNode = this.root;
+        for (let i = 0; i < word.length; i++) {
+          let char = word[i];
+          if (currentNode.children[char]) {
+            currentNode = currentNode.children[char];
+          } else {
+            // never existed?
+            return;
+          }
+        }
+        // wasnt a word?
+        if (!currentNode.word) {
+          return;
+        }
+
+        currentNode.word = false;
+
+        // if we have children that means we are a prefix, dont delete
+        if (currentNode.hasChildren()) {
+          return;
+        }
+
+        // delete any characters trailing
+        while (currentNode.parent != null && !currentNode.word) {
+          delete currentNode.parent.children[currentNode.val];
+          currentNode = currentNode.parent;
+        }
+      }
+
+      // checks if the word exists
+      exists(a) {
+        let curr = this.root;
+        for (let i = 0; i < a.length; i++) {
+          let char = a[i];
+          if (curr.children[char]) {
+            curr = curr.children[char];
+          } else {
+            return false;
+          }
+        }
+        console.log(curr);
+        return curr.word;
+      }
+
+      // if this trie has this prefix
+      hasPrefix(a, b) {
+        let curr = this.root;
+        for (let i = 0; i < a.length; i++) {
+          let char = a[i];
+          if (curr.children[char]) {
+            curr = curr.children[char];
+          } else {
+            return false;
+          }
+        }
+        return true;
+      }
+    }
+
+### Graphs
+There are two ways to represent graphs:
+
+**Node/Graph OO**
+
+    class Node {
+      constructor(name) {
+        this.name = name
+        this.children = []
+        this.childrenLookup = {}
+      }
+      addChild(child) {
+        this.children.push(child)
+        this.childrenLookup[child.name] = child
+      }
+    }
+
+    class Graph {
+      constructor(nodes) {
+        this.nodes = nodes
+        // create lookup by name
+        this.nodeLookup = {}
+        this.nodes.forEach(node => {this.nodeLookup[node.name]=node})
+      }
+    }
+
+    // helper func to create a directed/undirected graph
+    // n => Array of names
+    // conn => Array of [source name,destination name]
+    const createGraph= (n,c, directed) => {
+      let nodes = n.map(n => new Node(n))
+      let graph = new Graph(nodes)
+
+      // add conn => [source,destination]
+      c.forEach(conn => {
+        let source = graph.nodeLookup[conn[0]]
+        let destination =graph.nodeLookup[conn[1]]
+        source.addChild(destination)
+
+        // if this graph is undirected we can add bidirectional conns everytime
+        if (!directed){
+          destination.addChild(source)
+        }
+      });
+      return graph
+    }
+
+**Adjacency Matrix**
+NxN matrix where n[i,j]= connection from node[i] => node[j]
+
+    // creates adj matrix for a directed/undirected graph
+    // n => Array of names
+    // conn => Array of [source name,destination name]
+    const createAdjacencyMatrix = (n,c,directed) => {
+      let nLengths= n.length
+      let adjacencyMatrix = []
+      n.forEach(() => {adjacencyMatrix.push(new Array(nLengths))})
+      c.forEach(([s,d]) => {
+        adjacencyMatrix[s][d] = true
+        if (!directed) {
+          adjacencyMatrix[d][s] = true
+        }
+      })
+      return adjacencyMatrix
+    }
+
+### Searches
+### Depth-First-Search (DFS)
+**t: O(V+E) s: O(V) where V = vertices(nodes) and E = edges (connections)**
+- Start at root
+- traverse each branch fully for a node, (depth first).
+- mark nodes as visited or not, and make sure to not traverse marked nodes
+- Often used if we want to traverse every node in a graph, but doesnt really matter
+- done recursively going into each nodes children
+  
+</a>
+
+    const dfs = (graph) => {
+      
+      let visited = new Set()
+
+      const traverseNode = (node) => {
+        if (visited.has(node)) return
+        visited.add(node)
+        node.children.forEach(c => {
+          traverseNode(c)
+        })
+      }
+      traverseNode(graph.nodes[0]) 
+    }
+
+### Breadth-First-Search (BFS)
+**t: O(V+E) s: O(V) where V = vertices(nodes) and E = edges (connections)**
+- Start at root
+- traverse each nodes connection fully (cover all immediate connections first)
+- mark nodes as visited or not, and make sure to not traverse marked nodes
+- Used to find shorted path as we try to stay as close to the original node as possible
+- Done using a queue where new node children are added to a queue, this allows us to visit the breadth first
+  
+</a>
+
+    const bfs = (graph) => {
+
+      let queue= []
+      let visited = new Set()
+      queue.push(graph.nodes[0])
+      while(queue.length > 0) {
+        let node = queue.shift()
+        visited.add(node)
+        node.children.forEach(c =>{
+          if (!visited.has(c)) {
+            queue.push(c)
+          }
+        })
+      }
+    }
+
+###  Bidirectional Search
+- we run two BFS from source and destination
+- if the searches collide we found the shortest path
+  
+</a>
+
+    const bidirSearch  = (a,b) => {
+      let firstQueue = []
+      let secondQueue = []
+      let firstVisited = new Set()
+      let secondVisited = new Set()
+      firstQueue.push(a)
+      secondQueue.push(b)
+
+      while (firstQueue.length>0 && secondQueue.length > 0) {
+        let first= firstQueue.shift()
+        firstVisited.add(first)
+        if (secondVisited.has(first)) 
+          return true
+        console.log("visit first:", first.name)
+
+        let second = secondQueue.shift()
+        if (firstVisited.has(second))
+          return true
+        secondVisited.add(second)
+        console.log("visit first:", second.name)
+
+        first.children.forEach(c => {
+          if (!firstVisited.has(c))
+            firstQueue.push(c)
+        })
+
+        second.children.forEach(c => {
+          if (!secondVisited.has(c))
+            secondQueue.push(c)
+        })
+
+      }
+      return false
+    }
+
