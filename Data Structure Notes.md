@@ -1,4 +1,30 @@
-# CTCI Notes
+# Data Structure Notes
+
+- [Data Structure Notes](#data-structure-notes)
+  - [Chapter 1: Arrays and Strings](#chapter-1-arrays-and-strings)
+    - [Hashtables](#hashtables)
+    - [Resizeable Arrays](#resizeable-arrays)
+    - [JAVA: StringBuilder](#java-stringbuilder)
+  - [Chapter 2: Linked Lists](#chapter-2-linked-lists)
+    - [Runner Technique](#runner-technique)
+  - [Chapter 3: Stacks and Queues](#chapter-3-stacks-and-queues)
+  - [Chapter 4: Trees and Graphs](#chapter-4-trees-and-graphs)
+    - [Tree implementation](#tree-implementation)
+    - [Binary Trees](#binary-trees)
+    - [Binary Tree Array implementation](#binary-tree-array-implementation)
+    - [Binary Search Trees](#binary-search-trees)
+    - [Balanced Trees](#balanced-trees)
+    - [Complete Binary Tree](#complete-binary-tree)
+    - [Full Binary Tree](#full-binary-tree)
+    - [Perfect Binary Tree](#perfect-binary-tree)
+    - [Binary Tree Traversals](#binary-tree-traversals)
+    - [Binary Heaps (Min-Heaps)](#binary-heaps-min-heaps)
+    - [Tries (Prefix Trees)](#tries-prefix-trees)
+    - [Graphs](#graphs)
+    - [Searches](#searches)
+    - [Depth-First-Search (DFS)](#depth-first-search-dfs)
+    - [Breadth-First-Search (BFS)](#breadth-first-search-bfs)
+    - [Bidirectional Search](#bidirectional-search)
 
 ## Chapter 1: Arrays and Strings
 
