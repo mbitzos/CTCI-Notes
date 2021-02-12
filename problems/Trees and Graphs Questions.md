@@ -1,3 +1,32 @@
+- [4.1 Route between nodes](#41-route-between-nodes)
+  - [BFS](#bfs)
+- [4.2 Minimal Tree](#42-minimal-tree)
+  - [Binary search tree](#binary-search-tree)
+- [4.3 List of Depths](#43-list-of-depths)
+  - [BFS with Depth increase flag](#bfs-with-depth-increase-flag)
+- [4.4 Check Balanced](#44-check-balanced)
+  - [Recursively validate and count](#recursively-validate-and-count)
+- [4.5 Validate BST](#45-validate-bst)
+  - [Recurssively validate](#recurssively-validate)
+- [4.6 Successor](#46-successor)
+  - [Farthest down left child on the right](#farthest-down-left-child-on-the-right)
+- [4.7 Build Order](#47-build-order)
+  - [Iterative Graph no Children check](#iterative-graph-no-children-check)
+- [4.8 Common Ancestor](#48-common-ancestor)
+  - [Traversal without links to parent](#traversal-without-links-to-parent)
+  - [With links to parent](#with-links-to-parent)
+- [4.9 BST Sequences](#49-bst-sequences)
+  - [Recursive Weaving](#recursive-weaving)
+- [4.10 Check subtree](#410-check-subtree)
+  - [recursive Hash substring comparision](#recursive-hash-substring-comparision)
+  - [Recursive check (this actually is better)](#recursive-check-this-actually-is-better)
+- [4.11 Random Node](#411-random-node)
+  - [Additional check](#additional-check)
+  - [Weight](#weight)
+- [4.12 Paths with Sums](#412-paths-with-sums)
+  - [Staggered Window](#staggered-window)
+  - [Traversal with path lookup [DP]](#traversal-with-path-lookup-dp)
+
 ## 4.1 Route between nodes
 **Q**: Create algo that returns if there exists a route between two nodes in a **directed** graph exists
 
@@ -353,7 +382,7 @@ Since the only assumption about this is when we insert into a BST the children m
 - if we find we dont match before the end cancel and return back to start of search ing t1
       
 
-# 4.11 Random Node
+## 4.11 Random Node
 **Q**: Design a binary search tree such that there is a method called: getRandomNode() that returns an equally weighted random chance to return any node
 
 ### Additional check
@@ -401,7 +430,7 @@ Since the only assumption about this is when we insert into a BST the children m
     }
 
 
-# 4.12 Paths with Sums
+## 4.12 Paths with Sums
 **Q**: return how many paths in a binary tree exist where the values sumed equal a number. it need not start or end at a root
 
 ### Staggered Window

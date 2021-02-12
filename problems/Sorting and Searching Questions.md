@@ -1,3 +1,30 @@
+- [10.1 Sorted Merge](#101-sorted-merge)
+  - [Two Pointer Tails](#two-pointer-tails)
+- [10.2 Group Anagrams](#102-group-anagrams)
+    - [Sorted  Sorts](#sorted--sorts)
+- [10.3 Search in Rotated Array](#103-search-in-rotated-array)
+  - [Two Step Binary Search](#two-step-binary-search)
+- [10.4 Sorted Search, No size](#104-sorted-search-no-size)
+  - [Find Bounds](#find-bounds)
+  - [Find first suitable end index](#find-first-suitable-end-index)
+- [10.5 Sparse Search](#105-sparse-search)
+  - [Find Valid Middle](#find-valid-middle)
+- [10.6 Sort Big File](#106-sort-big-file)
+  - [External Sort](#external-sort)
+- [10.7.1 Missing Int](#1071-missing-int)
+  - [Bit Vector](#bit-vector)
+- [10.7.2 Missing Int](#1072-missing-int)
+  - [Blocks](#blocks)
+- [10.8 Find Duplicates](#108-find-duplicates)
+  - [Bit Vector](#bit-vector-1)
+- [10.9 Sorted Matrix Search](#109-sorted-matrix-search)
+  - [Binary Search](#binary-search)
+- [10.10 Rank from Stream](#1010-rank-from-stream)
+  - [BST with counter](#bst-with-counter)
+- [10.11 Peaks and Valley](#1011-peaks-and-valley)
+  - [Sorted and swap](#sorted-and-swap)
+  - [Peak Swapper](#peak-swapper)
+
 ## 10.1 Sorted Merge
 **Q**: Given two sorted arrays A,B. B contains enough space at the end to have enough space for A, merge A into B and sort it
 
@@ -259,7 +286,7 @@ If the bit is already 1, then print
 - The base case is if our middle points go **out of our defined bounds** by top,left,right,bottom
 - or if one of the **middles equals our target**
 
-### 10.10 Rank from Stream
+## 10.10 Rank from Stream
 **Q**: You are reading integers into a stream. Implement a datastructure that has two methods:
 track (x) that is called when you read in an integer
 getRankOfNumber(x) which returns how many numbers are less than or equal (not including the instance of x itself)
@@ -339,7 +366,7 @@ class BSTTracker {
   }
 }
 
-### 10.11 Peaks and Valley
+## 10.11 Peaks and Valley
 **Q**: You are reading integers into a stream. Implement a datastructure that has two methods:
 track (x) that is called when you read in an integer
 getRankOfNumber(x) which returns how many numbers are less than or equal (not including the instance of x itself)

@@ -1,3 +1,26 @@
+- [Linked List Implementation](#linked-list-implementation)
+  - [2.1 Remove Dups](#21-remove-dups)
+    - [HashSet](#hashset)
+  - [2.1.1 Remove Dups No Temporary Buffer ~ s: O(1)](#211-remove-dups-no-temporary-buffer--s-o1)
+    - [Lookup](#lookup)
+  - [2.2 Return Kth to Last](#22-return-kth-to-last)
+    - [Offset Look ahead](#offset-look-ahead)
+  - [2.3 Delete Middle Node](#23-delete-middle-node)
+    - [Copy and Delete last](#copy-and-delete-last)
+  - [2.4 Partition](#24-partition)
+    - [Left and Right Pointers](#left-and-right-pointers)
+  - [2.5 Sum lists](#25-sum-lists)
+    - [Iterative Carry bit](#iterative-carry-bit)
+    - [Recursive Carry bit](#recursive-carry-bit)
+  - [2.6 Palindrome](#26-palindrome)
+    - [Reverse Linked List and Check](#reverse-linked-list-and-check)
+    - [Iterative Stack](#iterative-stack)
+  - [2.7 Intersection](#27-intersection)
+    - [HashSet](#hashset-1)
+    - [Iterative Aligned Tail Checks](#iterative-aligned-tail-checks)
+  - [2.8 Loop Detection](#28-loop-detection)
+    - [Floyds Look Detection](#floyds-look-detection)
+
 # Linked List Implementation
 	
 	public class LinkedList {

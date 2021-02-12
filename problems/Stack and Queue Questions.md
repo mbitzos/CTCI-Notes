@@ -1,5 +1,18 @@
-# Implementation
-## Stack
+- [Stack Implementation](#stack-implementation)
+- [3.1 Three in One](#31-three-in-one)
+  - [????](#)
+- [3.2 Stack Min](#32-stack-min)
+  - [Min Stack](#min-stack)
+- [3.3 Stack of Plates](#33-stack-of-plates)
+  - [Stack of Plates](#stack-of-plates)
+- [3.4 Queue Via Stacks](#34-queue-via-stacks)
+  - [Two Stacks](#two-stacks)
+- [3.5 Sort Stack](#35-sort-stack)
+  - [MinStack](#minstack)
+- [3.6 Animal Shelter](#36-animal-shelter)
+  - [Buh](#buh)
+
+## Stack Implementation
     class StackNode {
       
       constructor(val, previous) {

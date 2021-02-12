@@ -1,3 +1,25 @@
+- [1.1 isUnique](#11-isunique)
+  - [PRE NOTES:](#pre-notes)
+  - [HashSet](#hashset)
+  - [Sorting](#sorting)
+- [1.2 Check Permutations](#12-check-permutations)
+  - [PRE NOTES:](#pre-notes-1)
+  - [HashSet](#hashset-1)
+  - [Sorted Array](#sorted-array)
+- [1.3 URLify](#13-urlify)
+  - [Iterative](#iterative)
+  - [In Place Backwards Iterative](#in-place-backwards-iterative)
+- [1.4 Palindrome Permutations](#14-palindrome-permutations)
+  - [HashSet](#hashset-2)
+  - [BIT VECTOR](#bit-vector)
+- [1.5 One Away:](#15-one-away)
+  - [DUMB Brute Force Iterative Recurssion](#dumb-brute-force-iterative-recurssion)
+  - [Iterative Comparision](#iterative-comparision)
+- [1.6 String Compression](#16-string-compression)
+  - [While loop skip and counts](#while-loop-skip-and-counts)
+- [1.9 String Rotation](#19-string-rotation)
+  - [Big Brain Plays](#big-brain-plays)
+
 ## 1.1 isUnique
 **Q**: Implement an algorithm to determine if a string has all unique characters. What if you
 cannot use additional data structures?
