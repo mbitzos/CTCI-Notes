@@ -2,6 +2,84 @@
 
 ## Chapter 5 - Bit Manipulation
 
+### Bit Tricks
+- x ^ 0s = x
+- x ^ 1s = x
+- x ^ x = 0s
+- x & 0s = 0s
+- x & 1s = x
+- x & x= x
+- x | 0s = x
+- x | 1s = 1s
+- x | x = x
+
+### 2s compliment and Negative Numbers
+- negative number =>  (~positivenumber + 1) prefixed with 1 bit
+- ex: 7 => 0[111],  -7 => 1[000 + 001] => 1[001]
+
+### Right Shifts
+**Arithmetic >>**
+- Shifts all bits to the right, and putting sign bits in the most significant bits
+  - this will roughly divide by two
+- ex: 1[101] >> 1 => 1[110]
+- ex: 1[101] >> 2 => 1[111]
+
+**Logical >>>**
+- Shifts all bits to the right, and putting 0s in most significant bits
+- ex: 111 >>> 1 => 011
+- ex: 111 >>> 2 => 001
+
+### Common Bit Methods
+**Get Bit**
+
+    // 1 << i => 0000...1....0000 where 1 is in the ith bit
+    // & will remove all other bits except the first one
+    // if the value is all 0s that means our bit was 0, else it was 1
+    return num & (1 << i) != 0
+
+**Set Bit**
+
+NOTE: this means to set it to 1 lol
+
+    // 1 << i => 0000...1....0000 where 1 is in the ith bit
+    // | will make it so that all other values dont matter except for the ith bit
+    // this guarentess that the ith bit gets set to 1 because x | 1 = 1
+    return num | (1 << i)
+
+**Clear Bit**
+
+    // ~(1 << i) => 11111...0....1111 where 0 is in the ith bit
+    // and will set the the ith bit to 0 because x & 0 = 0
+    return num & ~(1 << i) 
+
+**Clear all signficant bits till i (inclusive)**
+
+    // 1 << i => 0000...1....0000 where 1 is in the ith bit
+    // subtracting 1 will give us [...00000][111111....] where the last 0 is the ith bit
+    // & the mask will set all values left of and including ith bit to 0
+    let mask = (1 << i) -1
+    return num & mask
+
+**Clear all bits after i (inclusive)**
+
+    // -1 = ...11111...
+    // -1 << (i+1) == ...11110000   where there are i+1 0s (i+1 because we want inclusive)
+    // & the mask will clear all the bits from i to the first bit
+    let mask = (-1 << (i+1))
+    return num & mask
+
+**Update Bit**
+
+    let bitVal = value ? 1 : 0
+
+    // 1111...0....1111 where 0 is at the ith bit
+    let mask = ~(1 << i)
+
+    // num & mask will clear the bit
+    // 1 << bitVal => 0000...[1/0]...0 where 1/0 is at the ith bit
+    // | the two will essentially take the num with the ith bit cleared and set it to the the value bitshifted in (1 << bitVal)
+    return (num & mask) | (1 << bitVal)
+
 ## Chapter 6 - Math and Logic Puzzles
 
 ## Chapter 7 - Object Oriented Design
