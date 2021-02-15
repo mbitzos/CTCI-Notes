@@ -81,6 +81,12 @@ NOTE: this means to set it to 1 lol
     return (num & mask) | (1 << bitVal)
 
 ## Chapter 6 - Math and Logic Puzzles
+### Prime Numbers
+- you can check between 1 and sqrt(n) and do n % i = 0 return false
+- Sieve of Eratosthenes
+  - Generates a list of prime numbers, useful for a lot of prime number checks
+### Probability
+  - ...im not writing this stuff down
 
 ## Chapter 7 - Object Oriented Design
 
@@ -99,6 +105,47 @@ NOTE: this means to set it to 1 lol
   - 
 
 ## Chapter 8 - Recurssion and Dynamic Programming
+
+### Bottom-Up Approach
+- build the solution for one case off the preivous case
+- ex: solve the case of a single element list, then solve the case for two element list ... etc
+  
+### Top-Down Approach
+- We think about dividing the problem for case N into subproblems
+
+### Half and Half Approach
+- dividing the dataset into halves (think binary search, merge sort etc)
+
+### Space efficiency
+- Each call to a function takes O(1) space so each step in the recursive will add to the space
+  - depth of n => O(n) space complexity
+- Its better to do it iteratively, all recursive functions can be done iteratively but it can be extremely complex
+  
+### Dynamic Programming & Memoization
+- DP is simply just caching results of subproblems (repeated recursive calls)
+  - some people call top down DP "memoization" and DP only refers to bottom up, it doenst matter
+  
+**Example: Fibinacci Numbers**
+
+    // basic recursive solution
+    func fib(n)
+      if (n <= 1) return n
+      return fib(n-1) + fib(n-2)
+  
+    // using DP
+    let results = [] // ith element represents fib(i) result
+    func fib(n,results)
+      if (n <=1) return n
+
+      // check cache first
+      if (results[n] != null) return results[n]
+      let result = fib(n-1) + fib(n-2)
+      
+      // store
+      results[n] = result
+      return result
+    
+
 
 ## Chapter 9 - System Design and Scalability
 
