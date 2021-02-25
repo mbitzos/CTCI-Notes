@@ -383,7 +383,7 @@ NOTE: Max heaps are essentially the same but elements are in descending order
 ### Graphs
 There are two ways to represent graphs:
 
-**Node/Graph OO**
+**Node/Graph**
 
     class Node {
       constructor(name) {
